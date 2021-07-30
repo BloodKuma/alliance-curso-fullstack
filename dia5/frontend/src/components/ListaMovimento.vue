@@ -13,7 +13,7 @@
         </b-alert>
         <FormMovimento ref="formAdicionar" :movimento="novoMovimento" title="Adicionar Usuario" v-on:confirmed="adicionarMovimento" idModal="modal-insert"/>
         <b-table ref="selectableTable" @row-selected="onRowSelected" selectable hover :items="movimentos"></b-table>
-        <Movimento v-if="selected.length > 0" :index="index" :movimento="movimentos" v-on:removed="removerMovimento(selected[0])" v-on:edited="editarMovimento"/>
+        <Movimento v-if="selected.length > 0" :index="index" :movimento="movimentos" v-on:removed="removerMovimento(index, selected[0])" v-on:edited="editarMovimento"/>
     </div>
 </template>
 
@@ -75,7 +75,7 @@ export default {
                 this.errorMessage.action = "inserir";
                 this.errorMessage.message = error.responsestatusText
             }
-            //this.$refs.formAdicionar.reset();
+            this.$refs.formAdicionar.reset();
         },
         editarMovimento: async function(movimento, index){
             try{
